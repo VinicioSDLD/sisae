@@ -1,0 +1,1 @@
+start cmd && atom %CD% && explorer %CD%
