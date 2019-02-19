@@ -1,4 +1,4 @@
-# Sistema Web NodeJS (API-AdonisJs\VIEW-ReactJs)
+# Sistema Web NodeJS (API-AdonisJs|VIEW-ReactJs)
 
   //Servidor de API AdonisJs, pré-configurado com:
   1. Bodyparser
