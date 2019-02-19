@@ -1,21 +1,20 @@
-# Adonis API application
+# Sistema Web NodeJS (API-AdonisJs\VIEW-ReactJs)
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+  //Servidor de API AdonisJs, pré-configurado com:
+  1. Bodyparser
+  2. Authentication
+  3. CORS
+  4. Lucid ORM
+  5. Migrations and seeds
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+# 1. Criar projeto API Adonis + Biblioteca MySQL
 
-# Desenvolvendo Sistema Web NodeJS
-# Framework - AdonisJS (API) | Biblioteca ReactJS (View)
-
-1. Criar projeto API Adonis + Add Biblioteca MySQL
     adonis new "nomeProjeto" --api-only && cd "nomeProjeto" && npm install mysql --save
 
-2. Configurando a Conexão MySQL
-    Arquivo “.env”
+# 2. Configurando a Conexão MySQL
+
+    //No Arquivo “.env”
+
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
@@ -24,15 +23,18 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
     DB_DATABASE=adonis
     HASH_DRIVER=bcrypt
 
-3. Ver status ( database/migrations ) e migrar tabelas defaults ( user, token) para o MySQL
+# 3. Ver status (database/migrations) / Migrar tabelas defaults (user, token)
+
     adonis migration:status
     adonis migration:run
 
-4. Criar controle HTTP de autenticação de usuários (app/controllers/http)
+# 4. Criar controle HTTP de autenticação de usuários (app/controllers/http)
+
   	adonis make:controller Auth
   	adonis make:controller App
 
     ### No arquivo recém criado “AuthController.js” adicione: ###
+
       //Constante do Model User
          const User = use('App/Models/User')
 
@@ -42,6 +44,7 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
            const user = await User.create(data)
            return user
          }
+
       //Método (async authenticate) – autenticação via token do usuário registrado
          async authenticate({ request, auth }){
            const {email, password} = request.all()
@@ -52,7 +55,9 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
     ### No arquivo recém criado “AppController.js” adicione o método: ###
 	      index () {  return 'Hello world'  }
 
-5. Criar CRUD => (model + migration + Controller) */ (-m Criar Migration | -c Criar Controller) /*
+# 5. Criar Model CRUD => (model + migration + Controller)
+
+    //(-m Criar Migration | -c Criar Controller)
   	adonis make:model Tweet –m –c
 
     ### No arquivo de migration recém criado “Tweet_schema.js” adicione os campos da tabela:
@@ -95,9 +100,10 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
           await tweet.delete()
         }
 
-6. Criando Rotas e Route.group do CRUD
+# 6. Criando Rotas e Route.group do CRUD
 
-    ### No arquivo de rotas (start/routes/routes.js) adicione as rotas dos métodos (register/authenticate) do arquivo AuthController.js adicione:
+    ### No arquivo de rotas (start/routes/routes.js) adicione as rotas dos métodos
+    (register/authenticate) do arquivo AuthController.js:
 
     //Rota de novo registro de usuário
     Route.post('/register', 'AuthController.register')
@@ -113,7 +119,7 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
     Route.resource('tweets','TweetController').apiOnly().except('update')
     }).middleware(['auth'])
 
-7. Listar rotas e testar com o Insomnia
+# 7. Listar rotas e testar com o Insomnia
     //Listar todas as rotas
     adonis route:list
 
@@ -137,3 +143,10 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
     Send GET Auth => Bearer Token
     //Enviar token de autenticação gerado
     TOKEN:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU1MDQ0Mjk5MX0.-7R-jEe_PbCGkqsJ4jQuSdRaYKJ53J5EUJFWHyY8K7I
+
+# 8. Comandos Git GitHub - Carregar repositório
+    git init
+    git add .
+    git commit -m "commit name"
+    git remote add origin git@github.com:VinicioSDLD/"repository".git
+    git push -u origin master
